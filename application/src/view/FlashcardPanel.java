@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
+import model.flashcard;
+import model.flashcardRepository;
 
 public class FlashcardPanel extends JPanel {
 
@@ -35,6 +37,20 @@ public class FlashcardPanel extends JPanel {
         showAnswerButton = new JButton("Antwort anzeigen");
         showAnswerButton.addActionListener((ActionEvent e) -> answerPanel.setVisible(true));
         add(showAnswerButton, BorderLayout.SOUTH);
+
+        flashcardRepository repo = new flashcardRepository();
+        List<flashcard> cards = repo.getAllCards();
+
+        if (!cards.isEmpty()) {
+            flashcard card = cards.get(0); // Erstmal nur die erste Karte anzeigen
+            loadFlashcard(
+                    card.getQuestion(),
+                    card.getChoices(),
+                    card.getAnswer(),
+                    card.isMultipleChoice()
+            );
+        }
+
     }
 
     public void loadFlashcard(String question, List<String> choices, String correctAnswer, boolean isMultipleChoice) {
@@ -60,7 +76,6 @@ public class FlashcardPanel extends JPanel {
             JLabel answerLabel = (JLabel) answerPanel.getComponent(0);
             answerLabel.setText("Antwort: " + correctAnswer);
         }
-
         revalidate();
         repaint();
     }
