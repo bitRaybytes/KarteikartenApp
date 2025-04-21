@@ -28,7 +28,7 @@ public class MainFrame extends JFrame implements ActionListener {
         cardLayout = new CardLayout();
         mainContent = new JPanel(cardLayout);
         mainContent.add(new FlashcardPanel(), "flashcard");
-        mainContent.add(new JLabel("Verwaltungspanel (bald verfügbar)"), "manage");
+        mainContent.add(new ManagePanel(), "manage");
 
         add(mainContent, BorderLayout.CENTER);
 

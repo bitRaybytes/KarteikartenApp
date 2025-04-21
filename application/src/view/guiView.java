@@ -6,6 +6,7 @@
 package view;
 
 import model.menuBar;
+import model.flashcard;
 
 import javax.swing.*;
 
@@ -59,6 +60,10 @@ public class guiView extends JFrame implements ActionListener {
             System.out.println("Reset");
         }
 
+    }
+
+    public interface CardSaveListener {
+        void onCardSaved(flashcard card);
     }
 
     public static void main(String[] args) {
