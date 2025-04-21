@@ -1,8 +1,3 @@
-/*
-*  Implementations of the dashboard view. What the user sees and able to interact.
-*  Please be aware of userfriendly behaviours in the application.
-* */
-
 package view;
 
 import javax.swing.*;
@@ -10,77 +5,66 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class dashboardView implements ActionListener{
+public class dashboardView extends JPanel implements ActionListener {
 
-    private static JButton nextBtn;
-    private static JButton backBtn;
-    private static JButton resetBtn;
+    private JButton nextBtn;
+    private JButton backBtn;
+    private JButton resetBtn;
 
-    private static JPanel dashboardPnl;
-    private static JPanel navigationPnl;
-    private JPanel cardsPnl;
+    private JPanel dashboardPnl;
+    private JPanel navigationPnl;
 
-    private static GridBagConstraints gbc =  new GridBagConstraints();
+    public static final String[] btnText = {"weiter", "zurück", "reset"};
 
-    public static String[] btnText = {"weiter", "zurück", "reset"};
+    public dashboardView() {
+        setLayout(new BorderLayout());
 
+        dashboardPnl = buildDashboardPanel();
+        navigationPnl = buildNavigationBar();
 
-    private static JButton callBtn(JPanel panel, String text, int gridx, int gridy){
+        add(dashboardPnl, BorderLayout.CENTER);
+        add(navigationPnl, BorderLayout.SOUTH);
+    }
+
+    private JPanel buildDashboardPanel() {
+        JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(framePrefs.setFrameSizeX(), framePrefs.setFrameSizeY() - 50));
+        panel.setBackground(Color.LIGHT_GRAY);
+        return panel;
+    }
+
+    private JPanel buildNavigationBar() {
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBackground(Color.GRAY);
+        panel.setPreferredSize(new Dimension(framePrefs.setFrameSizeX(), 50));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        nextBtn = createButton(btnText[0], 2, 0, gbc, panel);
+        backBtn = createButton(btnText[1], 0, 0, gbc, panel);
+        resetBtn = createButton(btnText[2], 1, 0, gbc, panel);
+
+        return panel;
+    }
+
+    private JButton createButton(String text, int gridx, int gridy, GridBagConstraints gbc, JPanel panel) {
         JButton btn = new JButton(text);
-
+        btn.addActionListener(this);
         gbc.gridx = gridx;
         gbc.gridy = gridy;
-        panel.add(btn,gbc);
+        panel.add(btn, gbc);
         return btn;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-//        if(e.getSource().equals(btnText[0])){
-//            System.out.println("Weiter");
-//        }
-//        if (e.getActionCommand().equalsIgnoreCase(btnText[1])){
-//            System.out.println("Zurück");
-//        }
-//        if(e.getActionCommand().equalsIgnoreCase(btnText[2])){
-//            System.out.println("Reset");
-//        }
-
+        String cmd = e.getActionCommand();
+        if (cmd.equalsIgnoreCase(btnText[0])) {
+            System.out.println("Weiter");
+        } else if (cmd.equalsIgnoreCase(btnText[1])) {
+            System.out.println("Zurück");
+        } else if (cmd.equalsIgnoreCase(btnText[2])) {
+            System.out.println("Reset");
+        }
     }
-
-
-
-    // Dashboard Panel
-    private static JPanel callDashboard(){
-        dashboardPnl = new JPanel();
-        dashboardPnl.setPreferredSize(new Dimension(framePrefs.setFrameSizeX(),framePrefs.setFrameSizeY()-50));
-        dashboardPnl.setBackground(Color.lightGray);
-
-
-        return dashboardPnl;
-    }
-
-    private static JPanel callNavigationbar(){
-        navigationPnl = new JPanel(new GridBagLayout());
-        navigationPnl.setBackground(Color.gray);
-        navigationPnl.setPreferredSize(new Dimension(framePrefs.setFrameSizeX(),50));
-
-        nextBtn = callBtn(navigationPnl, btnText[0],2,0);
-        backBtn = callBtn(navigationPnl, btnText[1],0,0);
-        resetBtn = callBtn(navigationPnl,btnText[2],1,0);
-
-        return navigationPnl;
-    }
-
-    // Instantiate Navigation Bar - to add on a JFrame/Panel
-    public static JPanel setNavigationbar(){
-        JPanel navigation = callNavigationbar();
-        return navigation;
-    }
-    // Instantiate Dashboard - to add on a JFrame/Panel
-    public static JPanel setDashboard(){
-        JPanel dashboard = callDashboard();
-        return dashboard;
-    }
-
 }

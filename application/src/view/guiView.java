@@ -21,6 +21,10 @@ import static view.framePrefs.setFrameSizeY;
 
 public class guiView extends JFrame implements ActionListener {
 
+    private JPanel mainPanel;
+    private CardLayout cardLayout;
+    private dashboardView dashboard;
+    private ManagePanel managePanel;
 
     menuBar menuBar = new menuBar(this);
 
@@ -30,13 +34,27 @@ public class guiView extends JFrame implements ActionListener {
         setSize(setFrameSizeX(),setFrameSizeY());
         setJMenuBar(menuBar);
 
-        add(setDashboard(), BorderLayout.CENTER);
-        add(setNavigationbar(), BorderLayout.SOUTH);
+        dashboard = new dashboardView();
+        managePanel = new ManagePanel();
 
+        cardLayout = new CardLayout();
+        mainPanel = new JPanel(cardLayout);
 
+        mainPanel.add(dashboard, "dashboard");
+        mainPanel.add(managePanel, "manage");
+
+        add(mainPanel, BorderLayout.CENTER);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    public void showDashboard() {
+        cardLayout.show(mainPanel, "dashboard");
+    }
+
+    public void showManagePanel() {
+        cardLayout.show(mainPanel, "manage");
     }
 
 
@@ -50,14 +68,14 @@ public class guiView extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(btnText[0])){
-            System.out.println("Weiter");
-        }
-        if (e.getActionCommand().equalsIgnoreCase(btnText[1])){
-            System.out.println("Zurück");
-        }
-        if(e.getActionCommand().equalsIgnoreCase(btnText[2])){
-            System.out.println("Reset");
+        String command = e.getActionCommand();
+
+        if (command.equalsIgnoreCase(btnText[0])) {
+            showManagePanel();
+        } else if (command.equalsIgnoreCase(btnText[1])) {
+            showDashboard();
+        } else if (command.equalsIgnoreCase(btnText[2])) {
+            // resetLogik
         }
 
     }
