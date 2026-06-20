@@ -1,6 +1,6 @@
 package view;
 
-import model.menuBar;
+import model.MenuBar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +10,13 @@ import java.awt.event.ActionListener;
 public class MainFrame extends JFrame implements ActionListener {
     private CardLayout cardLayout;
     private JPanel mainContent;
-    private menuBar menuBar = new menuBar(this);
+    private MenuBar menuBar = new MenuBar(this);
 
     public MainFrame() {
+        initialize();
+    }
+
+    private void initialize(){
         setTitle("Karteikarten App");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 700);

@@ -13,7 +13,7 @@ public class NavigationPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setPreferredSize(new Dimension(200, getHeight()));
         setBackground(Color.LIGHT_GRAY);
-        new learnPanel();
+        new LearnPanel();
 
         JButton toggleButton = new JButton("☰");
         toggleButton.addActionListener(e -> toggle());

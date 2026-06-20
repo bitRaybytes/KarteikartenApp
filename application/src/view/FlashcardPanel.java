@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
-import model.flashcard;
-import model.flashcardRepository;
+import model.Flashcard;
+import model.FlashcardRepository;
 
 public class FlashcardPanel extends JPanel {
 
@@ -38,11 +38,11 @@ public class FlashcardPanel extends JPanel {
         showAnswerButton.addActionListener((ActionEvent e) -> answerPanel.setVisible(true));
         add(showAnswerButton, BorderLayout.SOUTH);
 
-        flashcardRepository repo = new flashcardRepository();
-        List<flashcard> cards = repo.getAllCards();
+        FlashcardRepository repo = new FlashcardRepository();
+        List<Flashcard> cards = repo.getAllCards();
 
         if (!cards.isEmpty()) {
-            flashcard card = cards.get(0); // Erstmal nur die erste Karte anzeigen
+            Flashcard card = cards.get(0); // Erstmal nur die erste Karte anzeigen
             loadFlashcard(
                     card.getQuestion(),
                     card.getChoices(),

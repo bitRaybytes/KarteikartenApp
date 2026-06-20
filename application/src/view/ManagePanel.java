@@ -1,7 +1,7 @@
 package view;
 
-import model.flashcard;
-import model.flashcardRepository;
+import model.Flashcard;
+import model.FlashcardRepository;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,18 +12,18 @@ public class ManagePanel extends JPanel {
 
     private JFrame frame;
     private JPanel listPanel;
-    private flashcardRepository repository;
+    private FlashcardRepository repository;
     private DefaultListModel<String> cardListModel;
     private JList<String> cardList;
     private JPanel cardPanel = new JPanel(new BorderLayout());
-    private flashcard selectedCard = null;
+    private Flashcard selectedCard = null;
 
 
 
     public ManagePanel() {
         setLayout(new BorderLayout());
-        repository = new flashcardRepository();
-        List<flashcard> cards = repository.getAllCards();
+        repository = new FlashcardRepository();
+        List<Flashcard> cards = repository.getAllCards();
 
         JLabel header = new JLabel("Karten verwalten", SwingConstants.CENTER);
         header.setFont(new Font("Arial", Font.BOLD, 20));
@@ -32,7 +32,7 @@ public class ManagePanel extends JPanel {
         listPanel = new JPanel();
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
 
-        for (flashcard card : cards) {
+        for (Flashcard card : cards) {
             listPanel.add(createCardEntry(card));
         }
 
@@ -45,7 +45,7 @@ public class ManagePanel extends JPanel {
         // Button to add a new card
         JButton addButton = new JButton("Neue Karte");
         addButton.addActionListener(e -> {
-            flashcard emptyCard = new flashcard(0, "", "", null, false);
+            Flashcard emptyCard = new Flashcard(0, "", "", null, false);
             FlashcardEditDialog dialog = new FlashcardEditDialog(frame, emptyCard);
             dialog.setCardSaveListener(card -> {
                 repository.saveCard(card);
@@ -57,7 +57,7 @@ public class ManagePanel extends JPanel {
 
     }
 
-    public void onCardSaved(flashcard newCard) {
+    public void onCardSaved(Flashcard newCard) {
         repository.saveCard(newCard);       // speichert in MySQL
         addCardToList(newCard);             // zeigt im GUI an
     }
@@ -65,7 +65,7 @@ public class ManagePanel extends JPanel {
 
 
 
-    public void addCardToList(flashcard newCard) {
+    public void addCardToList(Flashcard newCard) {
         JLabel cardLabel = new JLabel("Frage: " + newCard.getQuestion());  // Anzeige der Frage
         cardLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         cardPanel.add(cardLabel);  // Füge das Label zum Panel hinzu
@@ -75,7 +75,7 @@ public class ManagePanel extends JPanel {
         cardPanel.repaint();
     }
 
-    private JPanel createCardEntry(flashcard card) {
+    private JPanel createCardEntry(Flashcard card) {
         JPanel cardPanel = new JPanel(new BorderLayout());
         cardPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         cardPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
@@ -122,9 +122,9 @@ public class ManagePanel extends JPanel {
 
     public void refreshList() {
         listPanel.removeAll();  // Leere die Liste
-        List<flashcard> cards = repository.getAllCards();  // Lade neue Karten
+        List<Flashcard> cards = repository.getAllCards();  // Lade neue Karten
 
-        for (flashcard card : cards) {
+        for (Flashcard card : cards) {
             listPanel.add(createCardEntry(card));
         }
 

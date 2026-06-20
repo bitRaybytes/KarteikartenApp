@@ -1,26 +1,25 @@
 package view;
 
-import model.flashcard;
-import model.flashcardRepository;
+import model.Flashcard;
+import model.FlashcardRepository;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class FlashcardEditDialog extends JDialog {
 
-    private flashcardRepository repository = new flashcardRepository();
+    private FlashcardRepository repository = new FlashcardRepository();
     private JTextField questionField;
     private JTextField answerField;
     private JCheckBox multipleChoiceCheck;
     private JTextField choicesField;
     private boolean saved = false;
-    private flashcard updatedCard;
-    private guiView.CardSaveListener listener;
+    private Flashcard updatedCard;
+    private GuiView.CardSaveListener listener;
 
-    public FlashcardEditDialog(JFrame parent, flashcard card) {
+    public FlashcardEditDialog(JFrame parent, Flashcard card) {
         super(parent, "Karte bearbeiten", true);
         setSize(500, 300);
         setLocationRelativeTo(parent);
@@ -64,7 +63,7 @@ public class FlashcardEditDialog extends JDialog {
         add(buttonPanel);
     }
 
-    public void setCardSaveListener(guiView.CardSaveListener listener) {
+    public void setCardSaveListener(GuiView.CardSaveListener listener) {
         this.listener = listener;
     }
 
@@ -75,7 +74,7 @@ public class FlashcardEditDialog extends JDialog {
         return panel;
     }
 
-    private flashcard createCardFromFields() {
+    private Flashcard createCardFromFields() {
         String question = questionField.getText().trim();
         String answer = answerField.getText().trim();
         boolean isMC = multipleChoiceCheck.isSelected();
@@ -85,14 +84,14 @@ public class FlashcardEditDialog extends JDialog {
             choices = Arrays.asList(choicesField.getText().trim().split("\\s*,\\s*"));
         }
         int id = (updatedCard != null) ? updatedCard.getId() : 0; // <- id erhalten, wenn bearbeitet
-        return new flashcard(id, question, answer, choices, isMC);
+        return new Flashcard(id, question, answer, choices, isMC);
     }
 
     public boolean isSaved() {
         return saved;
     }
 
-    public flashcard getUpdatedCard() {
+    public Flashcard getUpdatedCard() {
         return updatedCard;
     }
 }
