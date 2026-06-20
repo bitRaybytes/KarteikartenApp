@@ -5,8 +5,8 @@
 
 package view;
 
-import model.menuBar;
-import model.flashcard;
+import model.MenuBar;
+import model.Flashcard;
 
 import javax.swing.*;
 
@@ -14,19 +14,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static view.dashboardView.btnText;
-import static view.dashboardView.*;
-import static view.framePrefs.setFrameSizeX;
-import static view.framePrefs.setFrameSizeY;
+import static view.DashboardView.btnText;
+import static view.FramePrefs.setFrameSizeX;
+import static view.FramePrefs.setFrameSizeY;
 
-public class guiView extends JFrame implements ActionListener {
+public class GuiView extends JFrame implements ActionListener {
 
     private JPanel mainPanel;
     private CardLayout cardLayout;
-    private dashboardView dashboard;
+    private DashboardView dashboard;
     private ManagePanel managePanel;
 
-    menuBar menuBar = new menuBar(this);
+    MenuBar menuBar = new MenuBar(this);
 
     private void setFrameView(){
 
@@ -34,7 +33,7 @@ public class guiView extends JFrame implements ActionListener {
         setSize(setFrameSizeX(),setFrameSizeY());
         setJMenuBar(menuBar);
 
-        dashboard = new dashboardView();
+        dashboard = new DashboardView();
         managePanel = new ManagePanel();
 
         cardLayout = new CardLayout();
@@ -58,12 +57,12 @@ public class guiView extends JFrame implements ActionListener {
     }
 
 
-    public guiView(){
+    public GuiView(){
         setFrameView();
     }
 
     public static void start(){
-        SwingUtilities.invokeLater(() -> new guiView());
+        SwingUtilities.invokeLater(() -> new GuiView());
     }
 
     @Override
@@ -81,7 +80,7 @@ public class guiView extends JFrame implements ActionListener {
     }
 
     public interface CardSaveListener {
-        void onCardSaved(flashcard card);
+        void onCardSaved(Flashcard card);
     }
 
     public static void main(String[] args) {

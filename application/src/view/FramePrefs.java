@@ -1,6 +1,6 @@
 package view;
 
-public class framePrefs {
+public class FramePrefs {
 
     // Frame prefs || Frame Height and Width
     public static int setFrameSizeX(){

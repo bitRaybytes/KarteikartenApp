@@ -1,10 +1,9 @@
 package model;
 
 import javax.swing.*;
-import java.awt.*;
 import java.sql.*;
 
-public class db_conn {
+public class DB_Conn {
 
     private static Connection conn = null;
     private Statement stmt = null;
@@ -34,7 +33,7 @@ public class db_conn {
         return conn;
     }
 
-    public db_conn() throws SQLException{
+    public DB_Conn() throws SQLException{
         conn = db_connection();
     }
 
@@ -50,7 +49,7 @@ public class db_conn {
     }
 
     public static void main(String[] args) throws SQLException{
-        new db_conn();
+        new DB_Conn();
     }
 
 }

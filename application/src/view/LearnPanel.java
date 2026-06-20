@@ -1,25 +1,25 @@
 package view;
 
-import model.flashcard;
-import model.flashcardRepository;
+import model.Flashcard;
+import model.FlashcardRepository;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
-public class learnPanel extends JPanel {
-    private List<flashcard> cards;
+public class LearnPanel extends JPanel {
+    private List<Flashcard> cards;
     private int currentIndex = 0;
     private JLabel questionLabel;
     private JButton revealButton;
     private JLabel answerLabel;
     private JButton nextButton;
 
-    public learnPanel() {
+    public LearnPanel() {
         setLayout(new BorderLayout());
 
-        flashcardRepository repository = new flashcardRepository();
+        FlashcardRepository repository = new FlashcardRepository();
         cards = repository.getAllCards();
 
         questionLabel = new JLabel("Frage wird geladen...", SwingConstants.CENTER);
@@ -52,13 +52,13 @@ public class learnPanel extends JPanel {
         }
     }
 
-    private void displayCard(flashcard card) {
+    private void displayCard(Flashcard card) {
         questionLabel.setText("Frage: " + card.getQuestion());
         answerLabel.setText("");  // Antwort wird erst auf Klick gezeigt
     }
 
     private void showAnswer() {
-        flashcard card = cards.get(currentIndex);
+        Flashcard card = cards.get(currentIndex);
         answerLabel.setText("Antwort: " + card.getAnswer());
     }
 

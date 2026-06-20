@@ -1,10 +1,9 @@
 package model;
 
 import javax.swing.*;
-import java.util.Arrays;
 import java.util.EventListener;
 
-public class menuBar extends JMenuBar{
+public class MenuBar extends JMenuBar{
     private static JMenu menu = new JMenu();
     private static JMenuItem menuItem = new JMenuItem();
 
@@ -33,7 +32,7 @@ public class menuBar extends JMenuBar{
         return menuItem;
     }
 
-    public menuBar(EventListener listener){
+    public MenuBar(EventListener listener){
         add(getMenuBar());
 
         if (menu.isMenuComponent(getMenu(0))){

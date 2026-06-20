@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class flashcardRepository {
+public class FlashcardRepository {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3307/karteikartenApp?useSSL=false&serverTimezone=UTC";
     private static final String DB_USER = "root";     // <- anpassen
     private static final String DB_PASSWORD = "";     // <- anpassen
 
-    public flashcardRepository() {
+    public FlashcardRepository() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Treiber laden
         } catch (ClassNotFoundException e) {
@@ -19,8 +19,8 @@ public class flashcardRepository {
         }
     }
 
-    public List<flashcard> getAllCards() {
-        List<flashcard> cards = new ArrayList<>();
+    public List<Flashcard> getAllCards() {
+        List<Flashcard> cards = new ArrayList<>();
         String sql = "SELECT * FROM flashcards";
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -39,7 +39,7 @@ public class flashcardRepository {
                     choices = Arrays.asList(choicesString.split("\\s*,\\s*"));
                 }
 
-                flashcard card = new flashcard(id, question, answer, choices, isMC);
+                Flashcard card = new Flashcard(id, question, answer, choices, isMC);
                 cards.add(card);
             }
 
@@ -50,7 +50,7 @@ public class flashcardRepository {
         return cards;
     }
 
-    public void saveCard(flashcard card) {
+    public void saveCard(Flashcard card) {
 
         if (card.getId() == 0) {
             // Neue Karte → INSERT
@@ -75,7 +75,7 @@ public class flashcardRepository {
         }
     }
 
-    public void updateCard(flashcard card) {
+    public void updateCard(Flashcard card) {
         String sql = "UPDATE flashcards SET question = ?, answer = ?, choices = ?, multipleChoice = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);

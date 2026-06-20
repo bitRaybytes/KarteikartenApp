@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public class flashcard {
+public class Flashcard {
     private String question;
     private String answer;
     private List<String> choices; // null oder leer für offene Fragen; optional bei Multiple Choice
@@ -11,7 +11,7 @@ public class flashcard {
 
     // Konstruktoren, Getter & Setter
 
-    public flashcard(int id, String question, String answer, List<String> choices, boolean isMultipleChoice) {
+    public Flashcard(int id, String question, String answer, List<String> choices, boolean isMultipleChoice) {
         this.id = id;
         this.question = question;
         this.answer = answer;

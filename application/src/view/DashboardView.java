@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class dashboardView extends JPanel implements ActionListener {
+public class DashboardView extends JPanel implements ActionListener {
 
     private JButton nextBtn;
     private JButton backBtn;
@@ -16,7 +16,7 @@ public class dashboardView extends JPanel implements ActionListener {
 
     public static final String[] btnText = {"weiter", "zurück", "reset"};
 
-    public dashboardView() {
+    public DashboardView() {
         setLayout(new BorderLayout());
 
         dashboardPnl = buildDashboardPanel();
@@ -28,7 +28,7 @@ public class dashboardView extends JPanel implements ActionListener {
 
     private JPanel buildDashboardPanel() {
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(framePrefs.setFrameSizeX(), framePrefs.setFrameSizeY() - 50));
+        panel.setPreferredSize(new Dimension(FramePrefs.setFrameSizeX(), FramePrefs.setFrameSizeY() - 50));
         panel.setBackground(Color.LIGHT_GRAY);
         return panel;
     }
@@ -36,7 +36,7 @@ public class dashboardView extends JPanel implements ActionListener {
     private JPanel buildNavigationBar() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(Color.GRAY);
-        panel.setPreferredSize(new Dimension(framePrefs.setFrameSizeX(), 50));
+        panel.setPreferredSize(new Dimension(FramePrefs.setFrameSizeX(), 50));
 
         GridBagConstraints gbc = new GridBagConstraints();
 
