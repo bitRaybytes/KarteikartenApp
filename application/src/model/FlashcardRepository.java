@@ -7,9 +7,10 @@ import java.util.List;
 
 public class FlashcardRepository {
 
+    // Auslagern in Env-Variablen oder ähnliches
     private static final String DB_URL = "jdbc:mysql://localhost:3307/karteikartenApp?useSSL=false&serverTimezone=UTC";
-    private static final String DB_USER = "root";     // <- anpassen
-    private static final String DB_PASSWORD = "";     // <- anpassen
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "";
 
     public FlashcardRepository() {
         try {
